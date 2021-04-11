@@ -38,7 +38,6 @@ function main () {
 	$tableHead = '<table id="results">';
 	echo $tableHead;
 	echo '<tr><th>Country</th><th>Total Deaths</th></tr>';
-	echo '<tr><td>0</td><td>0</td></tr>';
 	echo '<tr><td id="00"></td><td id="01"></td></tr>';
 	echo '<tr><td id="10"></td><td id="11"></td></tr>';
 	echo '<tr><td id="20"></td><td id="21"></td></tr>';
@@ -58,13 +57,40 @@ function main () {
 		  xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 			  
-			  var everything = JSON.parse(this.responseText);
-            everything.sort((a,b) => b[7] - a[7]);
+			  var everything = ["Country", 1];
+			  everything = JSON.parse(this.responseText);
+                
+                
+			  document.getElementById("00").innerHTML = everything.Countries[0].Country;
+			  document.getElementById("01").innerHTML = everything.Countries[0].TotalDeaths;
 			  
+			  document.getElementById("10").innerHTML = everything.Countries[1].Country;
+			  document.getElementById("11").innerHTML = everything.Countries[1].TotalDeaths;
 			  
-			  document.getElementById("00").innerHTML = everything.Countries[0].NewDeaths;
-			  document.getElementById("01").innerHTML = everything.Countries[1].NewDeaths;
+			  document.getElementById("20").innerHTML = everything.Countries[2].Country;
+			  document.getElementById("21").innerHTML = everything.Countries[2].TotalDeaths;
 			  
+			  document.getElementById("30").innerHTML = everything.Countries[3].Country;
+			  document.getElementById("31").innerHTML = everything.Countries[3].TotalDeaths;
+			  
+			  document.getElementById("40").innerHTML = everything.Countries[4].Country;
+			  document.getElementById("41").innerHTML = everything.Countries[4].TotalDeaths;
+			  
+			  document.getElementById("50").innerHTML = everything.Countries[5].Country;
+			  document.getElementById("51").innerHTML = everything.Countries[5].TotalDeaths;
+			  
+			  document.getElementById("60").innerHTML = everything.Countries[6].Country;
+			  document.getElementById("61").innerHTML = everything.Countries[6].TotalDeaths;
+			  
+			  document.getElementById("70").innerHTML = everything.Countries[7].Country;
+			  document.getElementById("71").innerHTML = everything.Countries[7].TotalDeaths;
+			  
+			  document.getElementById("80").innerHTML = everything.Countries[8].Country;
+			  document.getElementById("81").innerHTML = everything.Countries[8].TotalDeaths;
+			  
+			  document.getElementById("90").innerHTML = everything.Countries[9].Country;
+			  document.getElementById("91").innerHTML = everything.Countries[9].TotalDeaths;
+                
 			}
 		  };
 		  var api = "https://api.covid19api.com/summary";
