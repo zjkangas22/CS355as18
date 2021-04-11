@@ -22,7 +22,7 @@ function main () {
 	// $json_string = file_get_contents($apiCall); 
 	$json_string = curl_get_contents($apiCall);
 	$obj = json_decode($json_string);
-	$data = $obj->Global->NewConfirmed;
+	$data = $obj->Global->TotalDeaths;
 
 	// echo html head section
 	echo '<html>';
@@ -32,30 +32,39 @@ function main () {
 	
 	// open html body section
 	echo '<body onload="loadDoc()">';
+    echo '<a href="http://github.com/zjkangas22/CS355as18/blob/main/cis355api.php">Link to Github code.</a>';
+    echo '<br>';
 	
-	echo '<div>';
-	$myObjString = '{"newCases1":' . $data . '}' ;
-	echo $myObjString;
-	echo '</div>';
-	
-	echo '<div>';
-	$myArray = array("newCases2"=>$data) ;
-	// $myArray = array("newCases2"=>array("A"=>1, "B"=>2)) ;
-	echo json_encode($myArray);
-	echo '</div>';
-	
-	echo '<div id="demo">';
-	echo '</div>';
+	$tableHead = '<table id="results">';
+	echo $tableHead;
+	echo '<tr><th>Country</th><th>Total Deaths</th></tr>';
+	echo '<tr><td>0</td><td>0</td></tr>';
+	echo '<tr><td id="00"></td><td id="01"></td></tr>';
+	echo '<tr><td id="10"></td><td id="11"></td></tr>';
+	echo '<tr><td id="20"></td><td id="21"></td></tr>';
+	echo '<tr><td id="30"></td><td id="31"></td></tr>';
+	echo '<tr><td id="40"></td><td id="41"></td></tr>';
+	echo '<tr><td id="50"></td><td id="51"></td></tr>';
+	echo '<tr><td id="60"></td><td id="61"></td></tr>';
+	echo '<tr><td id="70"></td><td id="71"></td></tr>';
+	echo '<tr><td id="80"></td><td id="81"></td></tr>';
+	echo '<tr><td id="90"></td><td id="91"></td></tr>';
+	echo '</table>';
+
 	echo '<script>';
 	echo '
-		var country_usa;
 		function loadDoc() {
 		  var xhttp = new XMLHttpRequest();
 		  xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-			  country_usa = JSON.parse(this.responseText).Global.NewConfirmed;
-			  document.getElementById("demo").innerHTML = country_usa;
-			 
+			  
+			  var everything = JSON.parse(this.responseText);
+            everything.sort((a,b) => b[7] - a[7]);
+			  
+			  
+			  document.getElementById("00").innerHTML = everything.Countries[0].NewDeaths;
+			  document.getElementById("01").innerHTML = everything.Countries[1].NewDeaths;
+			  
 			}
 		  };
 		  var api = "https://api.covid19api.com/summary";
