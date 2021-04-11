@@ -60,7 +60,7 @@ function main () {
 			  var everything = ["Country", 1];
 			  everything = JSON.parse(this.responseText);
                 
-                
+                everything.Countries.sort((a,b) => b.TotalDeaths - a.TotalDeaths);
 			  document.getElementById("00").innerHTML = everything.Countries[0].Country;
 			  document.getElementById("01").innerHTML = everything.Countries[0].TotalDeaths;
 			  
@@ -90,6 +90,7 @@ function main () {
 			  
 			  document.getElementById("90").innerHTML = everything.Countries[9].Country;
 			  document.getElementById("91").innerHTML = everything.Countries[9].TotalDeaths;
+			  
                 
 			}
 		  };
